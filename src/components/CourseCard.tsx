@@ -3,15 +3,16 @@
 import { Course } from "@/types/course";
 import { motion } from "framer-motion";
 import * as Icons from "lucide-react";
+import { LucideIcon } from "lucide-react";
 
 interface Props {
   course: Course;
 }
 
 export default function CourseCard({ course }: Props) {
-  // safe icon fallback
+  // safe icon mapping with proper typing
   const Icon =
-    Icons[course.icon_name as keyof typeof Icons] ||
+    (Icons as unknown as Record<string, LucideIcon>)[course.icon_name] ||
     Icons.BookOpen;
 
   return (
