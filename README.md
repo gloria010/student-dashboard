@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Student Dashboard
 
-## Getting Started
+Frontend Intern Challenge: Next-Gen Learning Dashboard
 
-First, run the development server:
+## Overview
 
-```bash
+This project is a futuristic student learning dashboard built using Next.js App Router, Supabase, Tailwind CSS, Framer Motion, and Lucide React.
+
+The dashboard displays student learning information in a Bento Grid layout with a dark-themed user interface. Course information is fetched from Supabase and displayed dynamically.
+
+## Tech Stack
+
+* Next.js (App Router)
+* TypeScript
+* Tailwind CSS
+* Supabase
+* Framer Motion
+* Lucide React
+* Vercel
+
+## Architecture Choices
+
+The application is organized into reusable components:
+
+* Sidebar
+* Hero Tile
+* Course Cards
+* Activity Tile
+
+The layout follows a Bento Grid design to create a modern dashboard experience.
+
+## Server and Client Component Split
+
+Server Components:
+
+* Data fetching from Supabase
+* Page-level rendering
+
+Client Components:
+
+* Sidebar interactions
+* Hover animations
+* Progress bar animations
+* Framer Motion effects
+
+This approach keeps data fetching efficient while maintaining smooth user interactions.
+
+## Supabase Integration
+
+Course data is stored in a Supabase PostgreSQL database.
+
+Table structure:
+
+* id (uuid)
+* title (text)
+* progress (integer)
+* icon_name (text)
+* created_at (timestamp)
+
+Data is fetched dynamically and rendered in the dashboard.
+
+## Loading and Error Handling
+
+* Loading states are implemented for data fetching.
+* Graceful error handling is used when database requests fail.
+
+## Animations
+
+Framer Motion is used for:
+
+* Card hover animations
+* Sidebar navigation interactions
+* Progress bar animations
+* Smooth transitions
+
+Animations use transform-based effects to avoid layout shifts and improve performance.
+
+## Responsive Design
+
+Desktop:
+
+* Full sidebar
+* Bento Grid layout
+
+Tablet:
+
+* Compact sidebar
+* Two-column grid
+
+Mobile:
+
+* Bottom navigation
+* Single-column layout
+
+## Challenges Faced
+
+* Dynamic Lucide icon rendering from database values
+* TypeScript type safety for icons
+* Vercel deployment configuration
+* Supabase environment variable setup
+
+## Environment Variables
+
+Create a `.env.local` file:
+
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_publishable_key
+
+A sample file is provided in `.env.example`.
+
+## Running Locally
+
+Install dependencies:
+
+npm install
+
+Run the development server:
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build for production:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+npm run build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deployment
 
-## Learn More
+The application is deployed on Vercel.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Live URL:
+student-dashboard-flax-sigma.vercel.app
