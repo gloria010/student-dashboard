@@ -24,10 +24,14 @@ export default function CourseCard({ course }: Props) {
       className="rounded-3xl border border-zinc-800 bg-zinc-900/70 p-6"
     >
       {/* ICON */}
-      <div className="mb-3 text-emerald-400">
-        <SafeIcon name={course.icon_name} />
-      </div>
+<div className="mb-3 text-emerald-400">
+  {(() => {
+    const IconComp =
+      (Icons as any)[course.icon_name] || Icons.BookOpen;
 
+    return <IconComp size={22} />;
+  })()}
+</div>
       {/* TITLE */}
       <h3 className="font-semibold text-lg">
         {course.title}
