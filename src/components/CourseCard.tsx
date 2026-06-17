@@ -2,7 +2,7 @@
 
 import { Course } from "@/types/course";
 import * as Icons from "lucide-react";
-
+import { motion } from "framer-motion";
 interface Props {
   course: Course;
 }
@@ -15,7 +15,15 @@ export default function CourseCard({ course }: Props) {
   const Icon = getIcon(course.icon_name);
 
   return (
-    <article className="rounded-3xl border border-zinc-800 bg-zinc-900/70 p-6">
+    <motion.article
+  whileHover={{ scale: 1.02 }}
+  transition={{
+    type: "spring",
+    stiffness: 300,
+    damping: 20,
+  }}
+  className="rounded-3xl border border-zinc-800 bg-zinc-900/70 p-6"
+>
       
       {/* ICON */}
       <div className="mb-3 text-emerald-400">
@@ -45,6 +53,6 @@ export default function CourseCard({ course }: Props) {
         {course.progress}%
       </p>
 
-    </article>
+    </motion.article>
   );
 }
