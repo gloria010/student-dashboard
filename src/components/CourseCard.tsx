@@ -1,7 +1,6 @@
 "use client";
 
 import { Course } from "@/types/course";
-import { motion } from "framer-motion";
 import * as Icons from "lucide-react";
 
 interface Props {
@@ -16,20 +15,14 @@ export default function CourseCard({ course }: Props) {
   const Icon = getIcon(course.icon_name);
 
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ scale: 1.02 }}
-      transition={{
-        type: "spring",
-        stiffness: 300,
-        damping: 20,
-      }}
-      className="rounded-3xl border border-zinc-800 bg-zinc-900/70 p-6"
-    >
+    <article className="rounded-3xl border border-zinc-800 bg-zinc-900/70 p-6">
+      
       {/* ICON */}
       <div className="mb-3 text-emerald-400">
-        <Icon size={22} />
+        {(() => {
+          const IconComp = (Icons as any)[course.icon_name] || Icons.BookOpen;
+          return <IconComp size={22} />;
+        })()}
       </div>
 
       {/* TITLE */}
@@ -37,24 +30,21 @@ export default function CourseCard({ course }: Props) {
         {course.title}
       </h3>
 
-      {/* PROGRESS TEXT */}
       <p className="mt-4 text-sm text-zinc-400">
         Progress
       </p>
 
-      {/* PROGRESS BAR */}
       <div className="mt-2 h-2 rounded-full bg-zinc-800 overflow-hidden">
-        <motion.div
-          initial={{ width: 0 }}
-          animate={{ width: `${course.progress}%` }}
-          transition={{ duration: 1, ease: "easeOut" }}
+        <div
           className="h-2 bg-emerald-500"
+          style={{ width: `${course.progress}%` }}
         />
       </div>
 
       <p className="mt-2 text-sm text-zinc-400">
         {course.progress}%
       </p>
-    </motion.article>
+
+    </article>
   );
 }
