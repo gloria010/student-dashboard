@@ -1,20 +1,18 @@
-"use client";
-
 import { Course } from "@/types/course";
 import { motion } from "framer-motion";
 import * as Icons from "lucide-react";
-import { LucideIcon } from "lucide-react";
 
 interface Props {
   course: Course;
 }
 
-export default function CourseCard({ course }: Props) {
-  // safe icon mapping with proper typing
-  const Icon =
-    (Icons as unknown as Record<string, LucideIcon>)[course.icon_name] ||
-    Icons.BookOpen;
+// SAFE ICON COMPONENT WRAPPER
+function SafeIcon({ name }: { name: string }) {
+  const Icon = (Icons as any)[name] || Icons.BookOpen;
+  return <Icon size={22} />;
+}
 
+export default function CourseCard({ course }: Props) {
   return (
     <motion.article
       whileHover={{ scale: 1.02 }}
@@ -27,7 +25,7 @@ export default function CourseCard({ course }: Props) {
     >
       {/* ICON */}
       <div className="mb-3 text-emerald-400">
-        <Icon size={22} />
+        <SafeIcon name={course.icon_name} />
       </div>
 
       {/* TITLE */}
