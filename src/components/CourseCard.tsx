@@ -1,3 +1,5 @@
+"use client";
+
 import { Course } from "@/types/course";
 import { motion } from "framer-motion";
 import * as Icons from "lucide-react";
@@ -6,15 +8,17 @@ interface Props {
   course: Course;
 }
 
-// SAFE ICON COMPONENT WRAPPER
-function SafeIcon({ name }: { name: string }) {
-  const Icon = (Icons as any)[name] || Icons.BookOpen;
-  return <Icon size={22} />;
+function getIcon(name: string) {
+  return (Icons as any)[name] || Icons.BookOpen;
 }
 
 export default function CourseCard({ course }: Props) {
+  const Icon = getIcon(course.icon_name);
+
   return (
     <motion.article
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
       whileHover={{ scale: 1.02 }}
       transition={{
         type: "spring",
@@ -24,19 +28,16 @@ export default function CourseCard({ course }: Props) {
       className="rounded-3xl border border-zinc-800 bg-zinc-900/70 p-6"
     >
       {/* ICON */}
-<div className="mb-3 text-emerald-400">
-  {(() => {
-    const IconComp =
-      (Icons as any)[course.icon_name] || Icons.BookOpen;
+      <div className="mb-3 text-emerald-400">
+        <Icon size={22} />
+      </div>
 
-    return <IconComp size={22} />;
-  })()}
-</div>
       {/* TITLE */}
       <h3 className="font-semibold text-lg">
         {course.title}
       </h3>
 
+      {/* PROGRESS TEXT */}
       <p className="mt-4 text-sm text-zinc-400">
         Progress
       </p>
@@ -46,11 +47,8 @@ export default function CourseCard({ course }: Props) {
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${course.progress}%` }}
-          transition={{
-            duration: 1,
-            ease: "easeOut",
-          }}
-          className="h-2 rounded-full bg-emerald-500"
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="h-2 bg-emerald-500"
         />
       </div>
 
